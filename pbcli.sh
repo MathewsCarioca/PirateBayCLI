@@ -1,18 +1,16 @@
 #!/bin/bash
 
-echo "Automação pra baixar jogos piratas"
-
 OPCOES=(
-"Pesquisar jogo"
-"Sair"
+"Search Game"
+"Exit"
 )
 
 ESCOLHA=$(printf '%s\n' "${OPCOES[@]}" | fzf --reverse --prompt="GUI Manager > " --height=40% --border --ansi)
 
 case "$ESCOLHA" in
-	"Pesquisar jogo")
+	"Search Game")
 		clear
-		read -p "titulo: " TITLE
+		read -p "Title: " TITLE
 		TITLE_ENCODED="${TITLE// /%20}"
 		URL="https://thepiratebay0.org/search/$TITLE_ENCODED/1/99/400"
 		HTML=$(curl -s "$URL")
@@ -21,7 +19,7 @@ case "$ESCOLHA" in
 		mapfile -t IDS < <(echo "$HTML" | xmllint --html --xpath '//div[@class="detName"]/a/@href' - 2>/dev/null | grep -oP '/torrent/\K[0-9]+')
 		mapfile -t UPLOADERS < <(echo "$HTML" | xmllint --html --xpath '//a[@class="detDesc"]/text()' - 2>/dev/null)
 		;;
-	"Sair")
+	"Exit")
 		clear
 		exit 0
 		;;
