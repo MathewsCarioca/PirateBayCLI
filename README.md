@@ -34,8 +34,8 @@ sudo pacman -S curl libxml2 fzf
 ## Usage
 
 ```bash
-chmod +x jolly-roger.sh
-./jolly-roger.sh
+chmod +x pbcli.sh
+./pbcli.sh
 ```
 
 1. Select **"Search Game:"** from the menu
